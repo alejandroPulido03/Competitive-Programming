@@ -7,29 +7,21 @@ using namespace std;
 #define MOD 1000000007
 #define INF 1000000000
 
-int main()
-{
+int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    ll n;
+    int n;
     cin >> n;
 
     ll dp[1000001] = {0};
 
-    for (ll i = 0; i <= n; i++)
-    {
-        if (i <= 1)
-            dp[i] = 1LL;
-        else
-        {
-            for (int j = 1; j <= min(6LL, i); j++)
-            {
-                (dp[i] += dp[i - j]) %= MOD;
-            }
-        }
-    }
+    dp[0] = 1LL;
+    dp[1] = 1LL;
+    for (int i = 2; i <= n; i++)
+        for (int j = min(i, 6); j >= 1; j--)
+            (dp[i] += dp[i - j]) %= MOD;
 
     cout << dp[n] << "\n";
 
