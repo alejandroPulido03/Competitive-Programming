@@ -4,24 +4,19 @@
 # [152] Maximum Product Subarray
 #
 
+
 # @lc code=start
 class Solution:
-    def maxProduct(self, nums: List[int]) -> int:
-        last = [1 for _ in nums]
-        dp = last
-        maxVal = float("-inf")
-
+    def maxProduct(self, nums) -> int:
+        max_val = -11
+        m = 0
         for i in range(len(nums)):
-            for j in range(len(nums) - i):
-                if j == 0:
-                    dp[i] = nums[i]
-                else:
-                    dp[i] = nums[i + j] * last[i]
-                maxVal = max(maxVal, dp[i])
-            last = dp
-        return maxVal
-
-        
+            b = 1
+            for j in range(i, len(nums)):
+                m = b * nums[j]
+                max_val = max(max_val, m)
+                b = m
+        return max_val
 
 
 # @lc code=end
