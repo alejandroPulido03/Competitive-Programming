@@ -20,15 +20,15 @@ import "fmt"
 type Node struct {
 	Val int
 	Neighbors []*Node
-}
+} 
 
-var visited [100]bool 
+
 
 func cloneGraph(node *Node) *Node {
 	if node != nil{
 		edges := make([][2]int, 0)
-		getEdges(node, &edges)
-		fmt.Println(edges)
+        var visited [101]bool
+		getEdges(node, &edges, &visited)
 		nodes := make(map[int]*Node, 0)
 		nodes[node.Val] = newNode(node.Val)
 	
@@ -56,14 +56,16 @@ func newNode(val int) *Node{
 	}
 }
 
-func getEdges(node *Node, edges *[][2]int){
+func getEdges(node *Node, edges *[][2]int, visited *[101]bool){
+    fmt.Println(node.Val, visited[node.Val])
 	if !visited[node.Val]{
 		visited[node.Val] = true
 		for _, n := range node.Neighbors{
 			fmt.Println(n.Val)
 			*edges = append(*edges, [2]int{node.Val, n.Val})
-			getEdges(n, edges)
+			getEdges(n, edges, visited)
 		}
 	}
 }
+
 

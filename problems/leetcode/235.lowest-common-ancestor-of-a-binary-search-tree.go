@@ -22,7 +22,7 @@ type TreeNode struct {
  * }
  */
 
- func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+ func lowestCommonAncestor2(root, p, q *TreeNode) *TreeNode {
 	if (root.Val >= p.Val && root.Val <= q.Val) || (root.Val <= p.Val && root.Val >= q.Val){
 		return root
 	} else if (root.Val > p.Val){
